@@ -14,14 +14,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/jwt")
 public class JWTController {
-
-
     @Autowired
     private GenerateJWTTokenUseCaseInterface generateJWTTokenUseCaseInterface;
 
     @PostMapping(value = "generate", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getJWTToken(@RequestBody GetTokenRequestDto getTokenRequestDto) {
-        return new ResponseEntity(generateJWTTokenUseCaseInterface.generateJWTToken(getTokenRequestDto).getToken(), HttpStatusCode.valueOf(200));
+        String token = generateJWTTokenUseCaseInterface.generateJWTToken(getTokenRequestDto).getToken();
+        if (token == null) {
+            return new ResponseEntity<>("", HttpStatusCode.valueOf(400));
+        } else {
+            return new ResponseEntity<>(token, HttpStatusCode.valueOf(200));
+        }
     }
-
 }
