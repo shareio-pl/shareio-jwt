@@ -16,6 +16,6 @@ WORKDIR /app
 
 COPY --from=build /app/target/jwtservice-0.0.1-SNAPSHOT.jar .
 
-EXPOSE 8085
+EXPOSE 8083
 
 CMD ["java", "-jar", "jwtservice-0.0.1-SNAPSHOT.jar"]
