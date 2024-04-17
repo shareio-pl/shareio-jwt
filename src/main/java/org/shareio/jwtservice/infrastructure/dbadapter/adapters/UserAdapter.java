@@ -2,16 +2,18 @@ package org.shareio.jwtservice.infrastructure.dbadapter.adapters;
 
 import org.shareio.jwtservice.core.usecases.port.dto.UserSecurityGetDto;
 import org.shareio.jwtservice.core.usecases.port.out.GetUserSecurityDaoInterface;
+import org.shareio.jwtservice.core.usecases.port.out.UpdateLastLoginDateCommandPort;
 import org.shareio.jwtservice.infrastructure.dbadapter.entities.UserEntity;
 import org.shareio.jwtservice.infrastructure.dbadapter.mappers.UserDatabaseMapper;
 import org.shareio.jwtservice.infrastructure.dbadapter.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
-public class UserAdapter implements GetUserSecurityDaoInterface {
+public class UserAdapter implements GetUserSecurityDaoInterface, UpdateLastLoginDateCommandPort {
     final UserRepository userRepository;
 
     public UserAdapter(UserRepository userRepository) {
@@ -26,6 +28,12 @@ public class UserAdapter implements GetUserSecurityDaoInterface {
             throw new NoSuchElementException();
         }
         return userEntity.map(UserDatabaseMapper::toDto);
+    }
+
+
+    @Override
+    public void updateUserSecurity(Long dbId, LocalDateTime lastLoginDate) {
+        userRepository.updateLastLoginDate(dbId, lastLoginDate);
     }
 }
 
