@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class SecurityEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long securityId;
+    private Long dbId;
     private String pwHash;
     private String accountType;
     private LocalDateTime registrationDate;

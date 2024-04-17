@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.util.UUID;
 
@@ -19,5 +21,6 @@ public class UserEntity {
     private UUID userId;
     private String email;
     @OneToOne(cascade = CascadeType.ALL)
+    @Fetch(FetchMode.SELECT)
     private SecurityEntity security;
 }
