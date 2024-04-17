@@ -9,11 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class UserAdapter implements GetUserSecurityDaoInterface {
-
     final UserRepository userRepository;
 
     public UserAdapter(UserRepository userRepository) {

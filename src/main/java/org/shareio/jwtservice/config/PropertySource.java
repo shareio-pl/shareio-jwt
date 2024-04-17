@@ -10,6 +10,6 @@ public class PropertySource {
     @Value("${jwt.secret}")
     private String secret;
 
-
-
+    @Value("${jwt.duration}")
+    private Integer duration;
 }

@@ -17,6 +17,7 @@ public class SecurityEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long securityId;
     private String pwHash;
+    private String accountType;
     private LocalDateTime registrationDate;
     private LocalDateTime lastLoginDate;
 }
